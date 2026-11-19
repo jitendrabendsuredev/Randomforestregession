@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Random Forest Assignments</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1d2433;--mu:#5b6578;--ac:#2f6fed;--ok:#1a8f4c;--bad:#d23b3b;--bd:#dde1ea;--code:#0f1729;--codetx:#e6edf7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10141d;--card:#1a2030;--tx:#e8ecf4;--mu:#9aa5ba;--ac:#6b9bff;--ok:#4cd08a;--bad:#ff7a7a;--bd:#2c3550;--code:#0a0e18}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,Segoe UI,Arial,sans-serif}
+.w{max-width:860px;margin:0 auto;padding:20px 14px 60px}
+h1{font-size:26px;margin:6px 0}h2{font-size:21px;margin:34px 0 10px;border-bottom:2px solid var(--ac);padding-bottom:6px}
+.mu{color:var(--mu)}.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin:12px 0}
+.q{font-weight:600;margin-bottom:8px}.o{display:block;width:100%;text-align:left;background:transparent;color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:8px 12px;margin:6px 0;font:inherit;cursor:pointer}
+.o:hover{border-color:var(--ac)}.o.c{border-color:var(--ok);background:rgba(26,143,76,.15)}.o.x{border-color:var(--bad);background:rgba(210,59,59,.15)}
+.sc{position:sticky;top:env(safe-area-inset-top,0px);background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;font-weight:600;z-index:5}
+.tag{display:inline-block;font-size:12px;padding:2px 9px;border-radius:99px;background:var(--ac);color:#fff;margin-left:8px;vertical-align:middle}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;margin:6px 8px 6px 0}
+.btn.g{background:transparent;color:var(--ac);border:1px solid var(--ac)}
+pre{background:var(--code);color:var(--codetx);padding:12px;border-radius:8px;overflow-x:auto;font:13px/1.5 ui-monospace,Consolas,monospace;margin:8px 0}
+.hid{display:none}
+</style></head><body><div class="w">
+<h1>Random Forest Assignments</h1>
+<p class="mu">Part A: 30 MCQs (click an option to check the answer). Part B: 5 business problems with CSV dataset and a Show / Hide solution button.</p>
+
+<h2>Part A: 30 MCQs</h2>
+<div class="sc" id="score">Score: 0 / 30</div>
+<div id="mcq"></div>
+
+<h2>Part B: 5 Business Problems</h2>
+<p class="mu">Save the CSV text in a file with the given name (same folder as your Python file), then solve. Try yourself first, then open the solution.</p>
+<div id="asg"></div>
+</div>
+<script>
+var Q=[
+["Random Forest is which type of method?",["Ensemble method","Clustering method","Dimensionality reduction","Rule-based method"],0],
+["Random Forest is made of many ___.",["Neurons","Decision trees","Clusters","Straight lines"],1],
+["Which class is used for a Yes/No prediction?",["RandomForestRegressor","LinearRegression","RandomForestClassifier","KMeans"],2],
+["Which class is used to predict house price?",["RandomForestClassifier","RandomForestRegressor","LogisticRegression","KMeans"],1],
+["In classification, the final answer of the forest is decided by ___.",["Average","Majority vote","Maximum value","Minimum value"],1],
+["In regression, the final answer of the forest is ___.",["Majority vote","Highest tree output","Average of all trees","First tree output"],2],
+["What does n_estimators mean?",["Number of columns","Number of trees","Number of rows","Number of classes"],1],
+["What does max_depth control?",["Number of trees","Size of dataset","Maximum depth of each tree","Test size"],2],
+["Why do we use random_state?",["To get same result every run","To increase accuracy always","To remove null values","To scale data"],0],
+["Bootstrap sampling means ___.",["Sampling without replacement","Random sampling with replacement","Taking only first rows","Deleting duplicates"],1],
+["Random Forest mainly reduces which problem of a single decision tree?",["Underfitting","Overfitting","Missing values","Typing errors"],1],
+["Which is NOT a hyperparameter of Random Forest?",["n_estimators","max_depth","accuracy","min_samples_split"],2],
+["Predicting whether a customer will leave (yes/no) is a ___ problem.",["Regression","Classification","Clustering","Association"],1],
+["Predicting delivery time in minutes is a ___ problem.",["Classification","Clustering","Regression","Association"],2],
+["feature_importances_ tells us ___.",["Accuracy of model","Importance of each input column","Number of trees","Test data size"],1],
+["Which metric is used for classification?",["accuracy_score","r2_score","mean_squared_error","mean_absolute_error"],0],
+["Which metric is commonly used for regression?",["accuracy_score","r2_score","confusion_matrix","classification_report"],1],
+["Does Random Forest need feature scaling (StandardScaler)?",["Always compulsory","Generally not needed","Only for classification","Only for regression"],1],
+["Which function splits data into train and test?",["fit_split()","split_data()","train_test_split()","divide()"],2],
+["Which method is used to train the model?",["predict()","fit()","score_it()","train_now()"],1],
+["Which method gives predictions?",["predict()","fit()","import()","split()"],0],
+["Increasing n_estimators generally makes the model ___.",["More stable but slower","Faster and weaker","Unsupervised","Unable to predict"],0],
+["A very large max_depth can cause ___.",["Underfitting","Overfitting","No training","Fewer features"],1],
+["Random Forest is available in which Python library?",["NumPy","Matplotlib","scikit-learn","Django"],2],
+["Correct import statement is ___.",["from sklearn.ensemble import RandomForestClassifier","import RandomForestClassifier","from sklearn import forest","from pandas import RandomForestClassifier"],0],
+["Each tree in a Random Forest is trained on ___.",["The full dataset only","A random bootstrap sample of data","Only test data","Only one column"],1],
+["Random feature selection at each split is used to ___.",["Make trees different from each other","Delete columns","Increase file size","Remove target column"],0],
+["Output of RandomForestRegressor is ___.",["A class label","A continuous number","A cluster number","A tree picture"],1],
+["Output of RandomForestClassifier is ___.",["A class label","A cluster centre","An average salary","A p-value"],0],
+["Random Forest is ___ learning.",["Unsupervised","Supervised","Reinforcement only","None of these"],1]
+];
+var done=0,sc=0,L="ABCD";
+var mq=document.getElementById("mcq");
+Q.forEach(function(q,i){
+ var d=document.createElement("div");d.className="card";
+ var t=document.createElement("div");t.className="q";t.textContent=(i+1)+". "+q[0];d.appendChild(t);
+ var bs=[];
+ q[1].forEach(function(o,j){
+  var b=document.createElement("button");b.className="o";b.textContent=L[j]+") "+o;
+  b.onclick=function(){
+   if(d.dataset.d)return;d.dataset.d=1;done++;
+   if(j===q[2]){b.classList.add("c");sc++}else{b.classList.add("x");bs[q[2]].classList.add("c")}
+   document.getElementById("score").textContent="Score: "+sc+" / 30"+(done===30?"  (finished)":"");
+  };
+  bs.push(b);d.appendChild(b);
+ });
+ mq.appendChild(d);
+});
+
+var A=[
+{t:"House Price Prediction",k:"reg",f:"house.csv",x:["area_sqft","bedrooms","age_years"],y:"price_lakh",n:[1250,3,5],
+p:"A real estate company in Pune wants to estimate the selling price of a flat from its area, number of bedrooms and age.",
+task:"Train a RandomForestRegressor, print the R2 score and predict the price of a 1250 sqft, 3 bedroom, 5 year old flat.",
+c:"area_sqft,bedrooms,age_years,price_lakh\n650,1,10,38\n800,2,8,52\n950,2,5,65\n1100,2,12,68\n1200,3,6,85\n1350,3,3,98\n1500,3,10,95\n1650,4,4,120\n1800,4,7,125\n2000,4,2,150\n750,1,15,40\n1000,2,9,62"},
+{t:"Loan Approval",k:"clf",f:"loan.csv",x:["income_k","credit_score","loan_amount_lakh"],y:"approved",n:[50,700,12],
+p:"A bank wants to decide automatically whether a loan application should be approved (1) or rejected (0).",
+task:"Train a RandomForestClassifier, print the accuracy and predict for a customer with income 50k, credit score 700 and loan 12 lakh.",
+c:"income_k,credit_score,loan_amount_lakh,approved\n25,580,10,0\n40,650,8,1\n55,720,12,1\n30,600,15,0\n70,780,20,1\n22,540,6,0\n48,690,10,1\n35,620,14,0\n85,800,25,1\n28,560,9,0\n60,740,15,1\n45,670,18,0"},
+{t:"Food Delivery Time",k:"reg",f:"delivery.csv",x:["distance_km","orders_in_queue","traffic_level"],y:"delivery_time_min",n:[6,2,2],
+p:"A food delivery app wants to show customers the expected delivery time (traffic_level: 1 = low, 3 = high).",
+task:"Train a RandomForestRegressor, print the R2 score and predict the time for 6 km distance, 2 orders in queue and traffic level 2.",
+c:"distance_km,orders_in_queue,traffic_level,delivery_time_min\n2,1,1,18\n5,3,2,32\n3,2,1,24\n8,4,3,50\n6,2,2,34\n1,0,1,12\n10,5,3,58\n4,3,2,30\n7,1,3,42\n2,4,2,26\n9,2,2,45\n5,1,1,27"},
+{t:"Telecom Customer Churn",k:"clf",f:"churn.csv",x:["monthly_bill","tenure_months","complaints"],y:"churn",n:[500,6,3],
+p:"A telecom company wants to find customers who may leave (churn = 1) so that the team can contact them early.",
+task:"Train a RandomForestClassifier, print the accuracy and predict churn for a customer with bill 500, tenure 6 months and 3 complaints.",
+c:"monthly_bill,tenure_months,complaints,churn\n500,3,4,1\n300,24,0,0\n650,5,3,1\n400,36,1,0\n700,2,5,1\n350,30,0,0\n550,8,2,1\n250,48,0,0\n600,4,3,1\n450,20,1,0\n720,6,4,1\n380,40,1,0"},
+{t:"Used Car Price",k:"reg",f:"car.csv",x:["age_years","km_driven_thousand","engine_cc"],y:"price_lakh",n:[4,50,1200],
+p:"A used car dealer wants to quote a fair resale price from the age, kilometres driven and engine size of a car.",
+task:"Train a RandomForestRegressor, print the R2 score and predict the price of a 4 year old car, driven 50 thousand km, with 1200 cc engine.",
+c:"age_years,km_driven_thousand,engine_cc,price_lakh\n1,10,1200,7.5\n3,35,1200,5.8\n5,60,1500,5.2\n2,20,1500,8.0\n7,90,1200,2.8\n4,45,1500,5.9\n6,75,1000,2.5\n8,100,1500,3.0\n1,12,1000,5.5\n3,30,1000,4.4\n9,120,1200,1.8\n5,55,1200,3.9"}
+];
+function code(a){
+ var r=a.k==="reg",M=r?"RandomForestRegressor":"RandomForestClassifier",S=r?"r2_score":"accuracy_score";
+ var cols=a.x.map(function(c){return '"'+c+'"'}).join(", ");
+ return ["# import pandas to read the CSV file","import pandas as pd",
+ "# import function to split data into train and test","from sklearn.model_selection import train_test_split",
+ "# import the Random Forest model","from sklearn.ensemble import "+M,
+ "# import the metric to check the model","from sklearn.metrics import "+S,
+ "# read the dataset","df = pd.read_csv(\""+a.f+"\")",
+ "# X holds the input columns","X = df[["+cols+"]]",
+ "# y holds the target column (what we want to predict)","y = df[\""+a.y+"\"]",
+ "# keep 75% data for training and 25% for testing","X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)",
+ "# create the model with 100 trees","model = "+M+"(n_estimators=100, random_state=42)",
+ "# train the model on training data","model.fit(X_train, y_train)",
+ "# predict the target for test data","y_pred = model.predict(X_test)",
+ "# print the score of the model","print(\""+(r?"R2 score":"Accuracy")+":\", "+S+"(y_test, y_pred))",
+ "# create a new record for prediction","new = pd.DataFrame([["+a.n.join(", ")+"]], columns=["+cols+"])",
+ "# predict for the new record and print it","print(\"Prediction:\", model.predict(new)[0])"].join("\n");
+}
+var ag=document.getElementById("asg");
+A.forEach(function(a,i){
+ var d=document.createElement("div");d.className="card";
+ var h=document.createElement("h3");h.style.margin="0 0 6px";h.textContent="Assignment "+(i+1)+": "+a.t;
+ var tg=document.createElement("span");tg.className="tag";tg.textContent=a.k==="reg"?"Regression":"Classification";h.appendChild(tg);d.appendChild(h);
+ var p=document.createElement("p");p.innerHTML="<b>Business problem:</b> ";p.appendChild(document.createTextNode(a.p));d.appendChild(p);
+ var tk=document.createElement("p");tk.innerHTML="<b>Task:</b> ";tk.appendChild(document.createTextNode(a.task));d.appendChild(tk);
+ var cl=document.createElement("div");cl.innerHTML="<b>Dataset ("+a.f+")</b>";d.appendChild(cl);
+ var pc=document.createElement("pre");pc.textContent=a.c;d.appendChild(pc);
+ var cb=document.createElement("button");cb.className="btn g";cb.textContent="Copy CSV";
+ cb.onclick=function(){try{navigator.clipboard.writeText(a.c);cb.textContent="Copied"}catch(e){var s=window.getSelection(),r=document.createRange();r.selectNodeContents(pc);s.removeAllRanges();s.addRange(r);cb.textContent="Selected, press Ctrl+C"}};
+ d.appendChild(cb);
+ var sb=document.createElement("button");sb.className="btn";sb.textContent="Show Solution";
+ var pr=document.createElement("pre");pr.className="hid";pr.textContent=code(a);
+ sb.onclick=function(){var h=pr.classList.toggle("hid");sb.textContent=h?"Show Solution":"Hide Solution"};
+ d.appendChild(sb);d.appendChild(pr);ag.appendChild(d);
+});
+</script></body></html>
